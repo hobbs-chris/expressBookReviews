@@ -55,9 +55,7 @@ public_users.get('/title/:title',function (req, res) {
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
   let isbn = req.params.isbn;
-  let review = isbn.reviews
-  
-  return res.send(JSON.stringify({review}, null, 4));
+  return res.send(JSON.stringify(books[isbn].reviews));
  });
 
 module.exports.general = public_users;
