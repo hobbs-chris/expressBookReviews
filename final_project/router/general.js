@@ -58,7 +58,7 @@ public_users.get("/author/:author", function (req, res) {
   const gewtBooksByAuthor = new Promise((resolve, reject) => {
     resolve(res.send(JSON.stringify({ booksByAuthor }, null, 4)));
   });
-  gewtBooksByAuthor.then(() => console.log("Promise 12 resolved"));
+  getBooksByAuthor.then(() => console.log("Promise 12 resolved"));
 });
 
 // Get all books based on title
@@ -74,7 +74,10 @@ public_users.get("/title/:title", function (req, res) {
       });
     }
   });
-  res.send(JSON.stringify({ booksByTitle }, null, 4));
+  const getBookByTitle = new Promise((resolve, reject) => {
+    resolve(res.send(JSON.stringify({ booksByTitle }, null, 4)));
+  });
+  getBookByTitle.then(() => console.log("Promise 13 resolved"));
 });
 
 //  Get book review
