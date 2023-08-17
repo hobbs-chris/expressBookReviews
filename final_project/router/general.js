@@ -26,22 +26,20 @@ public_users.post("/register", (req, res) => {
 public_users.get("/", function (req, res) {
   //Write your code here
   // Create promise-based callback
-  const getBookList = () => {
-    return new Promise((resolve, reject) => {
-      if (books) {
-        resolve(books);
-      } else {
-        reject(new Error("Failed to fetch book list"));
-      }
-    });
-  };
+  const getBookList = new Promise((resolve, reject) => {
+    resolve(res.send(JSON.stringify({ books }, null, 4)));
+  });
+  getBookList.then(() => console.log("Promise 10 resolved."));
 });
 
 // Get book details based on ISBN
 public_users.get("/isbn/:isbn", function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
-  return res.send(books[isbn]);
+  const getBook = new Promise((resolve, reject) => {
+    resolve(res.send(books[isbn]));
+  });
+  getBook.then(() => console.log("Promise 11 resolved"));
 });
 
 // Get book details based on author
@@ -57,7 +55,10 @@ public_users.get("/author/:author", function (req, res) {
       });
     }
   });
-  res.send(JSON.stringify({ booksByAuthor }, null, 4));
+  const gewtBooksByAuthor = new Promise((resolve, reject) => {
+    resolve(res.send(JSON.stringify({ booksByAuthor }, null, 4)));
+  });
+  gewtBooksByAuthor.then(() => console.log("Promise 12 resolved"));
 });
 
 // Get all books based on title
